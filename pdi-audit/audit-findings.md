@@ -9,7 +9,7 @@
 | Capability | Evidence | Notes |
 |---|---|---|
 | **Service Portal** | `sp_portal` table populated, 9 portals exist | Foundational — what we need for the portal build |
-| **Knowledge Base** | `kb_knowledge` has data | Foundational — KB articles for Care to suggest |
+| **Knowledge Base** | `kb_knowledge` has data | Foundational — KB articles for Otto to suggest |
 | **Virtual Agent / Conversational Interfaces** | `sys_cs_topic` exists | VA framework present, can author topics |
 | **UI Builder / Now Experience** | `sys_ux_app` exists, lots of `sn_*` UI components | Modern surface available |
 | **NLU Studio v2.0.0** | Scoped app present | Foundation for natural language understanding |
@@ -38,7 +38,7 @@ Stock, La Jolla, Coral, EC Theme, Customer Experience Coral, ESC Theme, Mobile E
 | Missing capability | Why we need it | Install via |
 |---|---|---|
 | **Customer Service Management (CSM)** | Spine spec names "CSM Case" as the workflow product. Right fit for student-services use case (account/contact model, external customer pattern). | ServiceNow Store via developer.servicenow.com |
-| **AI Agent Studio (`sn_aia_*`)** | "Care" the AI Wellbeing Assistant needs to live somewhere agentic. Same product family Susy used for the OIA build on PSDS. | Store / dev portal request |
+| **AI Agent Studio (`sn_aia_*`)** | Otto (the single AI assistant) needs to live somewhere agentic. Same product family Susy used for the OIA build on PSDS. | Store / dev portal request |
 | **Now Assist Skill Kit / Now Assist platform** | For the empathic intake conversation (more than just NLU). | Store / dev portal request |
 
 ## Recommendation

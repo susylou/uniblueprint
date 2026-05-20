@@ -18,7 +18,7 @@ After exploring the SDK's `explain` topics, **every spine component is authorabl
 | The student portal itself | `ServicePortal()` | `sp_portal` |
 | Aotearoa Coastal theme + SCSS variables | `SPTheme()` | `sp_theme` |
 | Portal pages (Home, Get Help hub, My Stuff, Knowledge) | `SPPage()` | `sp_page` |
-| Custom widgets (Hero, Today panel, Quick Actions, Care chat) | `SPWidget()` | `sp_widget` |
+| Custom widgets (Hero, Today panel, Quick Actions, Otto chat) | `SPWidget()` | `sp_widget` |
 | Portal navigation menu | `SPMenu()` | `sp_instance_menu` |
 | Header / footer | `Record()` *(per SDK guide)* | `sp_header_footer` |
 | Widget dependencies (external libs if needed) | `SPWidgetDependency()` | `sp_dependency` |
@@ -28,7 +28,7 @@ After exploring the SDK's `explain` topics, **every spine component is authorabl
 
 | Spine concept | Fluent API |
 |---|---|
-| "Care" the Wellbeing AI Agent | `AiAgent()` |
+| Otto the AI agent (single agent, multi-mode) | `AiAgent()` |
 | Empathic intake agentic workflow | `AiAgenticWorkflow()` |
 | Now Assist skills (KB search, summarisation, etc.) | `NowAssistSkillConfig()` |
 
@@ -60,7 +60,7 @@ After exploring the SDK's `explain` topics, **every spine component is authorabl
 The Fluent guide is explicit: **Service Portal runs AngularJS 1.x + Bootstrap 3**. Important implications for the build:
 
 - **Visual design**: we have full reign with CSS/SCSS — modern layouts, our Pacific palette, custom typography, CSS Grid, animation. The v0.2 design comp ports cleanly.
-- **Interactivity**: must be AngularJS controllers using controller alias `c` (no `$scope`). Modern JS modules don't apply *inside widgets*. This is fine — interactions like "Talk to Care", chat input, today panel are all simple AngularJS patterns.
+- **Interactivity**: must be AngularJS controllers using controller alias `c` (no `$scope`). Modern JS modules don't apply *inside widgets*. This is fine — interactions like "Talk to Otto", chat input, today panel are all simple AngularJS patterns.
 - **No React** inside Service Portal widgets. For modern Next-Experience surfaces (UI Builder, workspaces) different rules apply — but the student portal stays AngularJS.
 - **Theme variables in SCSS** — palette goes in the theme as SCSS variables, never hardcoded into widget CSS. Means swap-to-USP-or-Canterbury later is one theme change.
 - **No `Record()` for portal components** — always use the dedicated API (`SPWidget`, `SPTheme`, etc.). Validation differs.
@@ -109,19 +109,19 @@ src/fluent/
 │   │   ├── my-stuff/
 │   │   │   └── my-stuff-page.now.ts
 │   │   └── conversation/
-│   │       └── conversation-page.now.ts  ← Care chat full-screen
+│   │       └── conversation-page.now.ts  ← Otto chat full-screen
 │   ├── widgets/
 │   │   ├── au-topbar/
 │   │   │   ├── widget.now.ts
 │   │   │   ├── client.js
 │   │   │   ├── template.html
 │   │   │   └── styles.scss
-│   │   ├── au-hero/                       ← greeting + Care CTA + search
+│   │   ├── au-hero/                       ← greeting + Otto CTA + search
 │   │   ├── au-today-panel/                ← heterogeneous case+class+deadline cards
 │   │   ├── au-quick-actions/              ← 6-card grid, category-coloured
 │   │   ├── au-hub-grid/                   ← Get Help hub cards (Wellbeing, IT, Money, …)
 │   │   ├── au-kb-rail/                    ← "Worth a read" recommendation rail
-│   │   ├── au-chat/                       ← Care / Tech help chat surface
+│   │   ├── au-chat/                       ← Otto chat surface (mode-aware gradient)
 │   │   └── au-footer/
 │   └── header-footer/
 │       └── student-portal-header-footer.now.ts
@@ -129,8 +129,8 @@ src/fluent/
 └── modules/
     └── m1-wellbeing/
         ├── ai-agent/
-        │   ├── care-agent.now.ts          ← AiAgent() definition
-        │   └── prompt.md                  ← the Care empathic intake prompt
+        │   ├── otto-agent.now.ts          ← AiAgent() definition (Wellbeing mode)
+        │   └── prompt.md                  ← Otto's wellbeing-mode empathic prompt
         ├── agentic-workflow/
         │   └── intake-triage.now.ts       ← AiAgenticWorkflow()
         └── flows/
@@ -170,13 +170,13 @@ The SDK guide is explicit: build components **bottom-up** — dependencies and p
 *Output: data model on which AI agent and workflow operate.*
 
 ### Phase 4 — Hero widgets (depends on Phase 2 + 3)
-15. **Hero widget** — greeting + Care CTA + search.
+15. **Hero widget** — greeting + Otto CTA + search.
 16. **Today panel widget** — pulls case data + timetable.
 17. **Quick actions widget** — category-coloured 6-card grid.
 18. **KB rail widget** — recommended articles.
 
 ### Phase 5 — AI agent (needs AI Agent Studio + Now Assist)
-19. **Care agent** — `AiAgent()` with empathic intake prompt.
+19. **Otto agent (Wellbeing mode)** — `AiAgent()` with empathic intake prompt.
 20. **Agentic workflow** — `AiAgenticWorkflow()` for triage routing.
 21. **Chat widget** — surface for the agent.
 

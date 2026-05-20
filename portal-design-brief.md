@@ -20,7 +20,7 @@ The portal is the surface customers see in the workshop. It's the demo. Three th
 
 Carrying forward from `tertiary-blueprint-context.md` and extending for portal specifics:
 
-- **AI-forward, not AI-only.** "Talk to Care" / "Talk to a Student Services Assistant" is the first-class CTA on the landing, but search, browse and direct human contact remain visible. The AI is the easiest path, not the only path.
+- **AI-forward, not AI-only.** "Talk to Otto" is the first-class CTA on the landing — Otto is the single AI assistant whose tone adapts per module (warm in Wellbeing, quick in IT, formal in admin). Search, browse and direct human contact remain visible. The AI is the easiest path, not the only path.
 - **Persona-first hero.** When a student is logged in, the hero shows *their* situation — open cases, upcoming appointments, deadlines — not a generic "welcome".
 - **Single column for content, generous whitespace.** This isn't a corporate intranet. Two-column dashboards feel cold.
 - **Plain language over jargon.** No "case", no "ticket". "Things you've asked about", "Conversations in progress", "Help with…".
@@ -121,10 +121,10 @@ These are the deliverables — one HTML slide per state, same family as `persona
 
 | # | State | Why it matters |
 |---|-------|----------------|
-| 1 | **Landing — unauthenticated** | First impression. Search-first, "Talk to Care" CTA prominent, language toggle visible, no module sprawl. |
+| 1 | **Landing — unauthenticated** | First impression. Search-first, "Talk to Otto" CTA prominent, language toggle visible, no module sprawl. |
 | 2 | **Landing — logged in, M1 active, no open cases** | Shows the personalised greeting + quick-action cards from active modules. Calm state. |
 | 3 | **Landing — logged in, M1 active, Aria has an open wellbeing case** | The "what's happening for you" panel takes precedence over quick-actions. Demonstrates the persona-first hero. |
-| 4 | **AI agent in chat — Care responding to Aria** | Shows the chat panel expanded over the landing, mid-conversation, with KB suggestions surfacing inline. |
+| 4 | **AI agent in chat — Otto responding to Aria (Wellbeing mode)** | Shows the chat panel expanded over the landing, mid-conversation, with KB suggestions surfacing inline. |
 | 5 | **My Stuff — list view** | Aria's open and recently closed conversations. Plain-language labels, no "case number" front-and-centre. |
 | 6 | **My Stuff — single conversation detail** | Full thread + status + next step. Shows how the case ID is *available* but de-emphasised. |
 | 7 | **Knowledge browse — module-faceted** | Topics surface from active modules. Shows how the same shell looks different on M1-only vs M1+M2 instances. |

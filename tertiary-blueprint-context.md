@@ -38,10 +38,10 @@ A **reusable tertiary education demo blueprint** built on ServiceNow CSM, design
 - **Aria Tupou** — Year 2 BCom student, 19, first-in-family, anxiety/sleep issues
 - **James Patel** — Student Wellbeing Advisor (front-line triage)
 - **Dr. Sarah O'Connor** — Senior Wellbeing Counsellor (clinical lead)
-- **Care** — AI Wellbeing Intake Assistant (portal first responder)
+- **Otto** — AI assistant (Wellbeing mode for this intake flow; same agent works across IT, money, admin in their respective modes)
 
 ### Flow 1 — Intake & Triage
-Student opens portal → engages AI agent "Care" → describes feelings → AI triages risk, suggests KB self-help → student requests human contact → AI creates CSM case with full context → routes to advisor queue → advisor reviews context and reaches out within 2 hours.
+Student opens portal → engages AI agent Otto (Wellbeing mode) → describes feelings → Otto triages risk, suggests KB self-help → student requests human contact → Otto creates CSM case with full context → routes to advisor queue → advisor reviews context and reaches out within 2 hours.
 
 ### Flow 2 — Care Coordination & Resolution
 Advisor books triage appointment → student completes pre-session questionnaire → triage session → advisor identifies clinical need → escalates to senior counsellor with full context → counselling session → care plan documented → academic accommodation linked → follow-up cadence set → case closed.
