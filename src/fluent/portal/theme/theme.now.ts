@@ -1,4 +1,6 @@
 import { SPTheme } from '@servicenow/sdk/core'
+import { StudentHeader } from '../header-footer/header.now'
+import { StudentFooter } from '../header-footer/footer.now'
 
 /**
  * Aotearoa Coastal — the theme that carries the design language of the
@@ -10,7 +12,7 @@ import { SPTheme } from '@servicenow/sdk/core'
  * so swapping the theme is the entire job of re-skinning the portal
  * for USP, Canterbury, or any other institution.
  *
- * See portal-wireframes.html (design comp v0.2) for the visual reference.
+ * See portal-wireframes.html (design comp v0.3) for the visual reference.
  */
 export const AotearoaCoastalTheme = SPTheme({
     $id: Now.ID['theme.aotearoa.coastal'],
@@ -20,6 +22,8 @@ export const AotearoaCoastalTheme = SPTheme({
     // Footer scrolls with content rather than anchored to viewport.
     fixedHeader: true,
     fixedFooter: false,
+    header: StudentHeader,
+    footer: StudentFooter,
 
     // SCSS variable bank — referenced by all widget SCSS in this scope.
     // Naming convention: $au-* (Aotearoa Uni) so widget authors know

@@ -1,0 +1,61 @@
+.au-footer {
+    background: $au-cream;
+    border-top: 1px solid $au-line;
+    padding: 24px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: $au-mute;
+    font-family: $au-font-body;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    .au-footer-ack {
+        font-style: italic;
+        max-width: 540px;
+        line-height: 1.5;
+        margin: 0;
+
+        strong {
+            color: $au-ink;
+            font-style: normal;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+    }
+
+    .au-footer-links {
+        display: flex;
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        a {
+            color: $au-mute;
+            text-decoration: none;
+            font-size: 11px;
+
+            &:hover {
+                color: $au-ink;
+            }
+
+            &:focus-visible {
+                outline: 2px solid $au-teal;
+                outline-offset: 2px;
+                border-radius: $au-radius-sm;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .au-footer {
+        padding: 18px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}

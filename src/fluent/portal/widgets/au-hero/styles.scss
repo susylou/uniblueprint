@@ -1,0 +1,268 @@
+/*
+ * Hero widget styles.
+ * References theme SCSS variables defined in `Aotearoa Coastal` theme.
+ * Keep visual decisions aligned with portal-wireframes.html v0.3.
+ */
+
+.au-hero {
+    padding: 56px 36px 40px;
+    background:
+        radial-gradient(ellipse at 90% 20%, rgba(232, 177, 78, 0.18), transparent 50%),
+        radial-gradient(ellipse at 10% 100%, rgba(15, 76, 92, 0.14), transparent 55%),
+        linear-gradient(180deg, $au-paper 0%, $au-cream 100%);
+    color: $au-ink;
+    font-family: $au-font-body;
+    position: relative;
+
+    .au-hero-greeting {
+        font-family: $au-font-display;
+        font-size: 52px;
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        margin: 0 0 8px;
+        color: $au-ink;
+
+        em {
+            font-style: italic;
+            color: $au-teal;
+            font-weight: 500;
+        }
+    }
+
+    .au-hero-sub {
+        font-size: 16px;
+        color: $au-mute;
+        margin-bottom: 36px;
+        max-width: 540px;
+        line-height: 1.5;
+    }
+
+    .au-hero-cards {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 18px;
+    }
+}
+
+/* Otto card — primary CTA */
+.au-otto-card {
+    background: $au-otto-warm;
+    color: $au-cream;
+    border: none;
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: $au-shadow-hero;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    font-family: $au-font-body;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 36px rgba(15, 76, 92, 0.24);
+    }
+
+    &:focus-visible {
+        outline: 3px solid $au-gold;
+        outline-offset: 3px;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: -30px;
+        bottom: -30px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(232, 177, 78, 0.35), transparent 60%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .au-otto-row {
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+        position: relative;
+        z-index: 1;
+    }
+
+    .au-otto-avatar {
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: $au-cream;
+        color: $au-terracotta;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .au-otto-meta {
+        flex: 1;
+    }
+
+    .au-otto-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        opacity: 0.75;
+        margin-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .au-otto-title {
+        font-family: $au-font-display;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.2;
+        margin-bottom: 8px;
+    }
+
+    .au-otto-sub {
+        font-size: 13.5px;
+        line-height: 1.5;
+        opacity: 0.92;
+        max-width: 380px;
+    }
+
+    .au-otto-cta {
+        margin-top: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: $au-cream;
+        color: $au-teal;
+        padding: 11px 18px;
+        border-radius: $au-radius-pill;
+        font-size: 13px;
+        font-weight: 600;
+
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+/* Search card — secondary CTA */
+.au-search-card {
+    background: $au-cream;
+    border: 1px solid $au-line;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: $au-font-body;
+
+    .au-search-label {
+        font-size: 11px;
+        color: $au-mute;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 10px;
+    }
+
+    .au-search-box {
+        background: $au-paper;
+        border: 1px solid $au-line;
+        border-radius: 10px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+        cursor: text;
+        transition: border-color 0.15s;
+
+        &:focus-within {
+            border-color: $au-teal;
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            color: $au-mute;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: $au-font-body;
+            font-size: 13px;
+            color: $au-ink;
+
+            &::placeholder {
+                color: $au-mute;
+            }
+        }
+    }
+
+    .au-search-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .au-chip {
+        background: $au-sand;
+        color: $au-ink;
+        padding: 6px 11px;
+        font-size: 11.5px;
+        font-weight: 500;
+        border: none;
+        border-radius: $au-radius-pill;
+        cursor: pointer;
+        font-family: $au-font-body;
+
+        &:hover {
+            background: darken($au-sand, 5%);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $au-teal;
+            outline-offset: 2px;
+        }
+    }
+}
+
+/* Mobile — stack the hero cards, tighten typography */
+@media (max-width: 768px) {
+    .au-hero {
+        padding: 28px 18px 24px;
+
+        .au-hero-greeting {
+            font-size: 34px;
+            letter-spacing: -0.5px;
+        }
+
+        .au-hero-sub {
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .au-hero-cards {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+    }
+
+    .au-otto-card {
+        padding: 20px;
+
+        .au-otto-title {
+            font-size: 19px;
+        }
+    }
+}

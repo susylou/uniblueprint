@@ -1,0 +1,44 @@
+<div class="au-hero">
+  <h1 class="au-hero-greeting">Kia ora, <em>{{c.data.firstName}}</em></h1>
+  <div class="au-hero-sub">It's good to see you. Take a breath — we'll work through whatever's on today.</div>
+
+  <div class="au-hero-cards">
+
+    <!-- Otto AI card -->
+    <button class="au-otto-card" ng-click="c.openOtto()" type="button" aria-label="Talk to Otto">
+      <div class="au-otto-row">
+        <div class="au-otto-avatar" aria-hidden="true">&#x2726;</div>
+        <div class="au-otto-meta">
+          <div class="au-otto-label">Your assistant · in Wellbeing mode</div>
+          <div class="au-otto-title">Otto is here whenever you need a kōrero</div>
+          <div class="au-otto-sub">Talk through how you're feeling, get pointed to help, or pick up a previous conversation — Otto has the full picture so you don't repeat your story.</div>
+          <span class="au-otto-cta">
+            Talk to Otto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Search card -->
+    <div class="au-search-card">
+      <div class="au-search-label">Looking for something?</div>
+      <label class="au-search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input
+          type="search"
+          ng-model="c.query"
+          ng-keydown="c.onSearchKey($event)"
+          placeholder="Type a question or topic…"
+          aria-label="Search for help or topics" />
+      </label>
+      <div class="au-search-chips">
+        <button class="au-chip" type="button" ng-click="c.useChip('Extension request')">Extension request</button>
+        <button class="au-chip" type="button" ng-click="c.useChip('Pay fees')">Pay fees</button>
+        <button class="au-chip" type="button" ng-click="c.useChip('Counselling')">Counselling</button>
+        <button class="au-chip" type="button" ng-click="c.useChip('Timetable')">Timetable</button>
+      </div>
+    </div>
+
+  </div>
+</div>
