@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aotearoa University — Wellbeing Demo: Personas & Flows</title>
+<style>
+  :root {
+    --sn-navy: #0B1E2E;
+    --sn-navy-2: #142A3D;
+    --sn-green: #62D84E;
+    --sn-green-2: #00C48F;
+    --sn-purple: #6B57FF;
+    --sn-white: #FFFFFF;
+    --sn-soft: rgba(255,255,255,0.08);
+    --sn-mute: rgba(255,255,255,0.6);
+    --sn-card: #FFFFFF;
+    --sn-card-text: #0B1E2E;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #06141E;
+    color: var(--sn-white);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "ServiceNow Sans", "Segoe UI", system-ui, sans-serif;
+    padding: 40px 0;
+    line-height: 1.4;
+  }
+  .preface {
+    max-width: 1280px;
+    margin: 0 auto 30px;
+    padding: 0 40px;
+    color: var(--sn-mute);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .preface strong { color: var(--sn-white); }
+  .slide {
+    width: 1280px;
+    min-height: 720px;
+    max-width: 95%;
+    margin: 0 auto 40px;
+    padding: 50px 60px;
+    background: linear-gradient(135deg, var(--sn-navy) 0%, var(--sn-navy-2) 100%);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sn-green) 0%, var(--sn-green-2) 50%, var(--sn-purple) 100%);
+  }
+  .aou-mark {
+    position: absolute;
+    top: 24px; right: 60px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--sn-mute);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .sn-mark {
+    position: absolute;
+    bottom: 24px; right: 60px;
+    font-size: 14px;
+    color: var(--sn-mute);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .sn-mark .dot { color: var(--sn-green); }
+  .slide-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 16px 0 6px;
+    letter-spacing: -0.5px;
+  }
+  .slide-subtitle {
+    font-size: 15px;
+    color: var(--sn-green);
+    margin-bottom: 30px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  /* PERSONAS LAYOUT */
+  .personas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 30px;
+  }
+  .persona-card {
+    text-align: center;
+    padding: 20px 10px;
+  }
+  .persona-avatar {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sn-green) 0%, var(--sn-green-2) 100%);
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 46px;
+    font-weight: 700;
+    color: var(--sn-navy);
+    letter-spacing: -1px;
+  }
+  .persona-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .persona-role { font-size: 13px; color: var(--sn-green); margin-bottom: 14px; font-weight: 600; letter-spacing: 0.3px; }
+  .persona-context { font-size: 13px; color: var(--sn-mute); line-height: 1.55; padding: 0 8px; }
+  .ai-callout {
+    margin-top: 36px;
+    padding: 22px 28px;
+    background: linear-gradient(135deg, rgba(107, 87, 255, 0.18), rgba(98, 216, 78, 0.12));
+    border-radius: 10px;
+    border: 1px solid rgba(98, 216, 78, 0.3);
+    display: flex; align-items: center; gap: 26px;
+  }
+  .ai-avatar {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sn-purple), var(--sn-green));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px;
+    color: var(--sn-white);
+    flex-shrink: 0;
+  }
+  .ai-meta { flex-shrink: 0; }
+  .ai-name { font-size: 20px; font-weight: 700; }
+  .ai-role { font-size: 12px; color: var(--sn-green); font-weight: 600; letter-spacing: 0.4px; }
+  .ai-context { flex: 1; font-size: 13px; color: var(--sn-mute); line-height: 1.55; }
+  /* FLOW LAYOUT */
+  .flow-lanes {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 24px;
+  }
+  .lane {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .lane-persona {
+    background: rgba(255,255,255,0.05);
+    padding: 14px 16px;
+    border-radius: 8px;
+    border-left: 3px solid var(--sn-green);
+  }
+  .lane-persona.ai { border-left-color: var(--sn-purple); background: rgba(107, 87, 255, 0.12); }
+  .lane-persona-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .lane-persona-role { font-size: 10px; color: var(--sn-mute); text-transform: uppercase; letter-spacing: 0.4px; }
+  .lane-steps {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .step {
+    background: var(--sn-card);
+    color: var(--sn-card-text);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    min-width: 130px;
+    max-width: 170px;
+    text-align: left;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.35;
+  }
+  .step-product {
+    display: block;
+    font-size: 9px;
+    color: var(--sn-purple);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .step.ai {
+    background: linear-gradient(135deg, #2B1F8F, #4A38CC);
+    color: var(--sn-white);
+  }
+  .step.ai .step-product { color: var(--sn-green); }
+  .arrow {
+    color: var(--sn-mute);
+    font-size: 18px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+  }
+  .end-marker {
+    background: var(--sn-green);
+    color: var(--sn-navy);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+  /* PRINT-AS-SLIDES */
+  @media print {
+    body { padding: 0; background: white; }
+    .slide { page-break-after: always; box-shadow: none; margin: 0; border-radius: 0; }
+    .preface { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preface">
+  <strong>Aotearoa University — Wellbeing Demo: Personas &amp; Flow</strong><br>
+  v0.1 working draft · 13 May 2026 · for SC discussion only. Persona names and details are placeholders. Cultural representation (Māori personas, Te Reo, tikanga) flagged for review by an appropriate Māori colleague before any real audience use.
+</div>
+
+<!-- SLIDE 1: PERSONAS -->
+<div class="slide">
+  <div class="aou-mark">AOTEAROA UNIVERSITY · WELLBEING DEMO</div>
+  <div class="slide-title">Personas</div>
+  <div class="slide-subtitle">Wellbeing pathway — who's in this story</div>
+
+  <div class="personas">
+    <div class="persona-card">
+      <div class="persona-avatar">AT</div>
+      <div class="persona-name">Aria Tupou</div>
+      <div class="persona-role">Year 2 BCom Student</div>
+      <div class="persona-context">19. Part-time at a café. Six weeks of poor sleep, lost motivation, anxiety about an upcoming finance exam. First-in-family.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-avatar">JP</div>
+      <div class="persona-name">James Patel</div>
+      <div class="persona-role">Student Wellbeing Advisor</div>
+      <div class="persona-context">Front-line triage in the Wellbeing team. Picks up cases from the portal, makes the first human contact, decides escalation.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-avatar">SO</div>
+      <div class="persona-name">Dr. Sarah O'Connor</div>
+      <div class="persona-role">Senior Wellbeing Counsellor</div>
+      <div class="persona-context">Clinical lead. Takes referrals from advisors, manages higher-acuity cases, coordinates academic accommodations.</div>
+    </div>
+  </div>
+
+  <div class="ai-callout">
+    <div class="ai-avatar">&#x2726;</div>
+    <div class="ai-meta">
+      <div class="ai-name">Care</div>
+      <div class="ai-role">AI WELLBEING INTAKE ASSISTANT</div>
+    </div>
+    <div class="ai-context">The first responder in the portal. Conducts the intake conversation, suggests self-help where appropriate, recognises escalation signals, hands off to a human with full context — no repeating their story.</div>
+  </div>
+
+  <div class="sn-mark">service<span class="dot">now</span>.</div>
+</div>
+
+<!-- SLIDE 2: FLOW 1 -->
+<div class="slide">
+  <div class="aou-mark">AOTEAROA UNIVERSITY · WELLBEING DEMO</div>
+  <div class="slide-title">Flow 1 — Intake &amp; Triage</div>
+  <div class="slide-subtitle">From distress to first human contact</div>
+
+  <div class="flow-lanes">
+    <!-- Aria's lane -->
+    <div class="lane">
+      <div class="lane-persona">
+        <div class="lane-persona-name">Aria Tupou</div>
+        <div class="lane-persona-role">Student</div>
+      </div>
+      <div class="lane-steps">
+        <div class="step"><span class="step-product">Student Portal</span>Opens "Get Support"</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Now Assist</span>Engages "Care" assistant</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Student Portal</span>Describes how she's feeling, in her own words</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Knowledge</span>Reads suggested self-help article</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Student Portal</span>"I'd like to talk to someone"</div>
+      </div>
+    </div>
+    <!-- Care AI lane -->
+    <div class="lane">
+      <div class="lane-persona ai">
+        <div class="lane-persona-name">Care</div>
+        <div class="lane-persona-role">AI Agent</div>
+      </div>
+      <div class="lane-steps">
+        <div class="step ai"><span class="step-product">AI Agent</span>Opens empathic conversation</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step ai"><span class="step-product">AI Agent</span>Triages risk level</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step ai"><span class="step-product">AI Agent</span>Recommends KB self-help</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step ai"><span class="step-product">AI Agent</span>Recognises escalation signal</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step ai"><span class="step-product">CSM Case</span>Creates wellbeing case · routes to queue · attaches full context</div>
+      </div>
+    </div>
+    <!-- James's lane -->
+    <div class="lane">
+      <div class="lane-persona">
+        <div class="lane-persona-name">James Patel</div>
+        <div class="lane-persona-role">Wellbeing Advisor</div>
+      </div>
+      <div class="lane-steps">
+        <div class="step"><span class="step-product">Agent Workspace</span>Notified of new wellbeing case</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Agent Workspace</span>Reviews full conversation context</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Agent Workspace</span>Reaches out to Aria within 2 hours</div>
+        <span class="arrow">&rarr;</span>
+        <div class="end-marker">End Flow 1</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sn-mark">service<span class="dot">now</span>.</div>
+</div>
+
+<!-- SLIDE 3: FLOW 2 -->
+<div class="slide">
+  <div class="aou-mark">AOTEAROA UNIVERSITY · WELLBEING DEMO</div>
+  <div class="slide-title">Flow 2 — Care Coordination &amp; Resolution</div>
+  <div class="slide-subtitle">From first contact to coordinated care plan</div>
+
+  <div class="flow-lanes">
+    <!-- James's lane -->
+    <div class="lane">
+      <div class="lane-persona">
+        <div class="lane-persona-name">James Patel</div>
+        <div class="lane-persona-role">Wellbeing Advisor</div>
+      </div>
+      <div class="lane-steps">
+        <div class="step"><span class="step-product">Agent Workspace</span>Books triage appointment</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Integrated Booking</span>Confirms slot with Aria</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Agent Workspace</span>Conducts triage session</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">CSM Case</span>Identifies need for clinical referral</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">CSM Case</span>Escalates to Senior Counsellor</div>
+      </div>
+    </div>
+    <!-- Aria's lane -->
+    <div class="lane">
+      <div class="lane-persona">
+        <div class="lane-persona-name">Aria Tupou</div>
+        <div class="lane-persona-role">Student</div>
+      </div>
+      <div class="lane-steps">
+        <div class="step"><span class="step-product">Student Portal</span>Booking confirmation</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Student Portal</span>Pre-session questionnaire</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">In-person</span>Attends triage session</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Student Portal</span>Requests academic extension via portal</div>
+      </div>
+    </div>
+    <!-- Sarah's lane -->
+    <div class="lane">
+      <div class="lane-persona">
+        <div class="lane-persona-name">Dr. Sarah O'Connor</div>
+        <div class="lane-persona-role">Senior Counsellor</div>
+      </div>
+      <div class="lane-steps">
+        <div class="step"><span class="step-product">Agent Workspace</span>Picks up referral with full context</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">Agent Workspace</span>Conducts counselling session</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">CSM Case</span>Documents care plan · links academic accommodation</div>
+        <span class="arrow">&rarr;</span>
+        <div class="step"><span class="step-product">CSM Case</span>Sets follow-up cadence</div>
+        <span class="arrow">&rarr;</span>
+        <div class="end-marker">Case closed with care plan</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sn-mark">service<span class="dot">now</span>.</div>
+</div>
+
+</body>
+</html>

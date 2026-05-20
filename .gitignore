@@ -1,0 +1,35 @@
+# OS junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node / Fluent SDK
+node_modules/
+dist/
+build/
+.now/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ServiceNow SDK build artefacts
+*.update.xml
+update_set_*.xml
+
+# Secrets — never commit creds
+.env
+.env.local
+*.secret
+credentials.json
+
+# Local Claude/agent scratch (if any)
+.claude/local/

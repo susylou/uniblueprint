@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aotearoa Tertiary Blueprint — Architecture Overview</title>
+<style>
+  :root {
+    --sn-navy: #0B1E2E;
+    --sn-navy-2: #142A3D;
+    --sn-green: #62D84E;
+    --sn-green-2: #00C48F;
+    --sn-purple: #6B57FF;
+    --sn-amber: #F5A623;
+    --sn-white: #FFFFFF;
+    --sn-soft: rgba(255,255,255,0.08);
+    --sn-mute: rgba(255,255,255,0.6);
+    --sn-card: #FFFFFF;
+    --sn-card-text: #0B1E2E;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #06141E;
+    color: var(--sn-white);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "ServiceNow Sans", "Segoe UI", system-ui, sans-serif;
+    padding: 40px 0;
+    line-height: 1.4;
+  }
+  .preface {
+    max-width: 1280px;
+    margin: 0 auto 30px;
+    padding: 0 40px;
+    color: var(--sn-mute);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .preface strong { color: var(--sn-white); }
+
+  .slide {
+    width: 1280px;
+    min-height: 720px;
+    max-width: 95%;
+    margin: 0 auto 40px;
+    padding: 44px 56px 30px;
+    background: linear-gradient(135deg, var(--sn-navy) 0%, var(--sn-navy-2) 100%);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sn-green) 0%, var(--sn-green-2) 50%, var(--sn-purple) 100%);
+  }
+  .aou-mark {
+    position: absolute;
+    top: 20px; right: 56px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--sn-mute);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .sn-mark {
+    position: absolute;
+    bottom: 16px; right: 56px;
+    font-size: 14px;
+    color: var(--sn-mute);
+    font-weight: 600;
+  }
+  .sn-mark .dot { color: var(--sn-green); }
+
+  .slide-title { font-size: 32px; font-weight: 700; margin: 8px 0 4px; letter-spacing: -0.5px; }
+  .slide-subtitle { font-size: 14px; color: var(--sn-green); margin-bottom: 24px; font-weight: 500; letter-spacing: 0.3px; }
+
+  /* MODULES ROW */
+  .modules-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .module {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 16px 18px;
+    position: relative;
+  }
+  .module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .module-label { font-size: 10px; color: var(--sn-mute); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .module-status {
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+  .module-status.done { background: rgba(98, 216, 78, 0.2); color: var(--sn-green); border: 1px solid rgba(98, 216, 78, 0.4); }
+  .module-status.active { background: rgba(245, 166, 35, 0.18); color: var(--sn-amber); border: 1px solid rgba(245, 166, 35, 0.4); }
+  .module-status.future { background: rgba(255,255,255,0.06); color: var(--sn-mute); border: 1px solid rgba(255,255,255,0.12); }
+  .module-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+  .module-focus { font-size: 12px; color: var(--sn-mute); line-height: 1.45; margin-bottom: 10px; min-height: 50px; }
+  .module-customer {
+    font-size: 11px;
+    color: var(--sn-white);
+    padding-top: 8px;
+    border-top: 1px dashed rgba(255,255,255,0.15);
+  }
+  .module-customer .lead-label { color: var(--sn-mute); font-size: 10px; text-transform: uppercase; letter-spacing: 0.4px; margin-right: 6px; }
+
+  /* CONNECTORS from modules down to spine */
+  .connectors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    height: 28px;
+    position: relative;
+  }
+  .connector {
+    width: 2px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, var(--sn-green) 100%);
+    margin: 0 auto;
+    height: 100%;
+  }
+
+  /* SPINE */
+  .spine-band {
+    background: linear-gradient(135deg, rgba(98, 216, 78, 0.10), rgba(107, 87, 255, 0.08));
+    border: 1px solid rgba(98, 216, 78, 0.25);
+    border-radius: 10px;
+    padding: 18px 22px 22px;
+    position: relative;
+  }
+  .spine-label {
+    position: absolute;
+    top: -10px; left: 22px;
+    background: var(--sn-navy-2);
+    padding: 0 10px;
+    font-size: 10px;
+    color: var(--sn-green);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  .spine-components {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .spine-cell {
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .spine-layer { font-size: 9px; color: var(--sn-green); font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
+  .spine-comp { font-size: 12.5px; font-weight: 700; line-height: 1.25; }
+  .spine-comp-sub { font-size: 10.5px; color: var(--sn-mute); margin-top: 3px; line-height: 1.3; }
+
+  /* INTEGRATION strip */
+  .integration {
+    margin-top: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .integration-label { font-size: 10px; color: var(--sn-mute); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .integration-systems { display: flex; gap: 16px; flex-wrap: wrap; }
+  .integration-system { font-size: 12px; color: var(--sn-white); font-weight: 500; }
+  .integration-system::before { content: "•"; color: var(--sn-green); margin-right: 6px; font-weight: 700; }
+
+  /* PRINCIPLES footer */
+  .principles {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px 18px;
+  }
+  .principle {
+    font-size: 11px;
+    color: var(--sn-mute);
+    line-height: 1.4;
+  }
+  .principle strong { color: var(--sn-white); font-weight: 700; }
+
+  @media print {
+    body { padding: 0; background: white; }
+    .slide { page-break-after: always; box-shadow: none; margin: 0; border-radius: 0; }
+    .preface { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preface">
+  <strong>Aotearoa Tertiary Education Blueprint — Architecture Overview</strong><br>
+  v0.1 working draft · 13 May 2026 · the anchor slide. Modules and customer references will evolve as the blueprint matures.
+</div>
+
+<div class="slide">
+  <div class="aou-mark">TERTIARY EDUCATION BLUEPRINT</div>
+  <div class="slide-title">Modular use cases on a shared ServiceNow spine</div>
+  <div class="slide-subtitle">One platform · many institutional stories · cleanly reusable</div>
+
+  <!-- MODULES -->
+  <div class="modules-row">
+
+    <div class="module">
+      <div class="module-header">
+        <span class="module-label">Module 1</span>
+        <span class="module-status done">v0.1 built</span>
+      </div>
+      <div class="module-name">Wellbeing &amp; Care Coordination</div>
+      <div class="module-focus">Emotional / pastoral. AI empathic intake → triage → clinical escalation → care plan with academic accommodation.</div>
+      <div class="module-customer"><span class="lead-label">Lead</span> Aotearoa University <span style="color:var(--sn-mute)">(fictional)</span></div>
+    </div>
+
+    <div class="module">
+      <div class="module-header">
+        <span class="module-label">Module 2</span>
+        <span class="module-status active">drafting</span>
+      </div>
+      <div class="module-name">Student Services Operations</div>
+      <div class="module-focus">Transactional / high-volume. Enrolment, fees, status changes, transcripts, multi-team coordination (finance + student services).</div>
+      <div class="module-customer"><span class="lead-label">Lead</span> University of the South Pacific <span style="color:var(--sn-mute)">(real)</span></div>
+    </div>
+
+    <div class="module">
+      <div class="module-header">
+        <span class="module-label">Module 3</span>
+        <span class="module-status future">future</span>
+      </div>
+      <div class="module-name">IT Service Management</div>
+      <div class="module-focus">Student- and staff-facing service catalog, asset management, after-hours self-service. Standard ITSM patterns.</div>
+      <div class="module-customer"><span class="lead-label">Lead</span> TBD</div>
+    </div>
+
+  </div>
+
+  <!-- CONNECTORS -->
+  <div class="connectors">
+    <div class="connector"></div>
+    <div class="connector"></div>
+    <div class="connector"></div>
+  </div>
+
+  <!-- SPINE -->
+  <div class="spine-band">
+    <span class="spine-label">Shared platform spine — constant across all modules</span>
+
+    <div class="spine-components">
+      <div class="spine-cell">
+        <div class="spine-layer">Experience</div>
+        <div class="spine-comp">Student Portal</div>
+        <div class="spine-comp-sub">CSM portal · mobile · accessible self-service entry</div>
+      </div>
+      <div class="spine-cell">
+        <div class="spine-layer">Intelligence</div>
+        <div class="spine-comp">AI Agent</div>
+        <div class="spine-comp-sub">Now Assist + AI Agent · empathic intake · always first responder</div>
+      </div>
+      <div class="spine-cell">
+        <div class="spine-layer">Workflow</div>
+        <div class="spine-comp">Case Management</div>
+        <div class="spine-comp-sub">CSM Case · routing · multi-team coordination</div>
+      </div>
+      <div class="spine-cell">
+        <div class="spine-layer">Tools</div>
+        <div class="spine-comp">Agent Workspace</div>
+        <div class="spine-comp-sub">Full context · escalation · documentation in one view</div>
+      </div>
+      <div class="spine-cell">
+        <div class="spine-layer">Knowledge</div>
+        <div class="spine-comp">Knowledge Base</div>
+        <div class="spine-comp-sub">Self-help articles · KB-fed AI · institutional memory</div>
+      </div>
+      <div class="spine-cell">
+        <div class="spine-layer">Insight</div>
+        <div class="spine-comp">Analytics &amp; PA</div>
+        <div class="spine-comp-sub">Performance Analytics · SLA · pattern detection</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTEGRATION -->
+  <div class="integration">
+    <span class="integration-label">Integration layer</span>
+    <div class="integration-systems">
+      <span class="integration-system">SIS</span>
+      <span class="integration-system">Student ERP</span>
+      <span class="integration-system">LMS (e.g. Moodle)</span>
+      <span class="integration-system">Finance</span>
+      <span class="integration-system">AD / Azure AD SSO</span>
+      <span class="integration-system">Identity &amp; access</span>
+    </div>
+  </div>
+
+  <!-- PRINCIPLES -->
+  <div class="principles">
+    <div class="principle"><strong>Modular</strong> — each module standalone, plugs into the same spine</div>
+    <div class="principle"><strong>Persona-driven</strong> — human story, not system walkthrough</div>
+    <div class="principle"><strong>Product-mapped</strong> — every step tags the ServiceNow product</div>
+    <div class="principle"><strong>AI-forward</strong> — AI is the first responder; humans escalate, not default</div>
+    <div class="principle"><strong>Swim-lane format</strong> — personas as lanes, products as callouts</div>
+    <div class="principle"><strong>Reusable, personalised</strong> — generic shell, customer-specific texture</div>
+    <div class="principle"><strong>Culturally aware</strong> — flag what needs local review before customer use</div>
+    <div class="principle"><strong>Grows by module</strong> — start with two, add as the conversation expands</div>
+  </div>
+
+  <div class="sn-mark">service<span class="dot">now</span>.</div>
+</div>
+
+</body>
+</html>
