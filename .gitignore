@@ -1,35 +1,40 @@
-# OS junk
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-.DS_Store
-
-# Editor/IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Node / Fluent SDK
-node_modules/
-dist/
-build/
+# --- ServiceNow Fluent SDK build artefacts ---
 .now/
+dist/
+target/
+*.tsbuildinfo
+.jest_cache
+
+# --- Node ---
+node_modules/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# ServiceNow SDK build artefacts
-*.update.xml
-update_set_*.xml
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# Secrets — never commit creds
+# --- Editors / IDEs ---
+.idea/
+*.swp
+*.swo
+*~
+# Keep .vscode/ — scaffolded extensions.json is project-relevant
+
+# --- Secrets ---
 .env
 .env.local
 *.secret
 credentials.json
+**/now-creds.json
 
-# Local Claude/agent scratch (if any)
-.claude/local/
+# --- ServiceNow legacy artefacts (avoid accidental commits) ---
+*.update.xml
+update_set_*.xml
+
+# --- Local Playwright / agent scratch ---
+.playwright-mcp/

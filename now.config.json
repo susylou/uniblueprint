@@ -1,0 +1,6 @@
+{
+  "scope": "x_uni_blueprint",
+  "scopeId": "e9b14dfcdd06402ea54174be15c04152",
+  "name": "Uni Blueprint",
+  "tsconfigPath": "./src/server/tsconfig.json"
+}
