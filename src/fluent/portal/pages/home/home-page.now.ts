@@ -1,11 +1,12 @@
 import { SPPage } from '@servicenow/sdk/core'
 import { HeroWidget } from '../../widgets/au-hero/widget.now'
+import { QuickActionsWidget } from '../../widgets/au-quick-actions/widget.now'
 
 /**
  * Student portal home page — the landing experience.
  *
  * v0.3 of the design comp shows: hero → Today panel → quick actions → KB rail.
- * For first cut, we ship the hero only. Today/quick-actions/KB widgets
+ * Stack so far: hero + quick-action cards. Today panel + KB rail
  * arrive in subsequent iterations of Phase 2.
  */
 export const HomePage = SPPage({
@@ -45,11 +46,43 @@ export const HomePage = SPPage({
                 },
             ],
         },
+        {
+            $id: Now.ID['page.home.container.quick'],
+            name: 'Quick Actions',
+            cssClass: 'au-page-container au-page-container--quick',
+            parentClass: 'container-fluid',
+            order: 200,
+            rows: [
+                {
+                    $id: Now.ID['page.home.row.quick'],
+                    cssClass: 'au-page-row',
+                    order: 100,
+                    columns: [
+                        {
+                            $id: Now.ID['page.home.col.quick'],
+                            size: 12,
+                            order: 100,
+                            instances: [
+                                {
+                                    $id: Now.ID['page.home.instance.quick'],
+                                    title: 'Quick Actions',
+                                    id: 'au-home-quick',
+                                    widget: QuickActionsWidget,
+                                    order: 100,
+                                    active: true,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
     ],
     css: `
         /* Page-level: paper background, no Bootstrap container chrome */
         body.sp { background: var(--au-paper, #FFFCF6); }
-        .au-page-container--hero { padding: 0; }
+        .au-page-container--hero,
+        .au-page-container--quick { padding: 0; }
         .au-page-row { margin: 0; }
         .au-page-row > [class^="col"] { padding: 0; }
     `,

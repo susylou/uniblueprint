@@ -55,17 +55,33 @@ declare global {
                         table: 'sp_column'
                         id: '2785e531ed934a4ba7176ae50bdf5c7c'
                     }
+                    'page.home.col.quick': {
+                        table: 'sp_column'
+                        id: '956121a0bf8649c99bf15811fff3c45e'
+                    }
                     'page.home.container.hero': {
                         table: 'sp_container'
                         id: '7d092ae657e049548cac8c0209b9e42a'
+                    }
+                    'page.home.container.quick': {
+                        table: 'sp_container'
+                        id: '58b8cb72771f4f84b6f2ca558ed6acb9'
                     }
                     'page.home.instance.hero': {
                         table: 'sp_instance'
                         id: 'fe5183e4414c4f10a270e74a11e018b2'
                     }
+                    'page.home.instance.quick': {
+                        table: 'sp_instance'
+                        id: '1a6a7ac8f4784624a84b5bda61233ce0'
+                    }
                     'page.home.row.hero': {
                         table: 'sp_row'
                         id: '56b1b5d56594411fa90c275e3c3ff50f'
+                    }
+                    'page.home.row.quick': {
+                        table: 'sp_row'
+                        id: '45a3097a713c474da2c26bffba8bb9c2'
                     }
                     'portal.au-student': {
                         table: 'sp_portal'
@@ -83,6 +99,10 @@ declare global {
                     'widget.au-hero': {
                         table: 'sp_widget'
                         id: '33e7bec2e13541ab80cf470a63507d23'
+                    }
+                    'widget.au-quick-actions': {
+                        table: 'sp_widget'
+                        id: '26483e723fb341db815357da011436ea'
                     }
                 }
                 composite: [

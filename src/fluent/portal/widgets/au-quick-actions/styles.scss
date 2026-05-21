@@ -1,0 +1,173 @@
+/*
+ * Quick-actions widget styles.
+ * Sits below the hero on the home page — four cards in a 4-up grid on
+ * desktop, 2-up on tablet, 1-up on mobile. Each card carries a tone
+ * (teal / pounamu / gold / terra) that tints the icon disc and CTA chevron
+ * while the card body itself stays paper-light for readability.
+ */
+
+.au-quick {
+    padding: 32px 36px 48px;
+    background: $au-paper;
+    color: $au-ink;
+    font-family: $au-font-body;
+}
+
+.au-quick-head {
+    max-width: 720px;
+    margin: 0 0 24px;
+
+    .au-quick-title {
+        font-family: $au-font-display;
+        font-size: 30px;
+        font-weight: 500;
+        letter-spacing: -0.5px;
+        margin: 0 0 6px;
+        color: $au-ink;
+    }
+
+    .au-quick-lede {
+        font-size: 15px;
+        color: $au-mute;
+        margin: 0;
+        line-height: 1.5;
+    }
+}
+
+.au-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    @media (max-width: 1100px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.au-quick-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+        "icon . cta"
+        "title title title"
+        "sub sub sub";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 8px;
+
+    background: #FFFFFF;
+    border: 1px solid $au-line;
+    border-radius: $au-radius-lg;
+    padding: 22px 22px 24px;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: $au-shadow-card;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+    font: inherit;
+    color: inherit;
+    width: 100%;
+
+    &:hover,
+    &:focus-visible {
+        transform: translateY(-2px);
+        box-shadow:
+            0 2px 4px rgba(26, 35, 41, 0.06),
+            0 10px 24px rgba(26, 35, 41, 0.10);
+        outline: none;
+    }
+
+    &:focus-visible {
+        border-color: $au-teal;
+        box-shadow:
+            0 0 0 3px rgba(15, 76, 92, 0.18),
+            0 10px 24px rgba(26, 35, 41, 0.10);
+    }
+}
+
+.au-quick-icon {
+    grid-area: icon;
+    width: 44px;
+    height: 44px;
+    border-radius: $au-radius-pill;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+.au-quick-card-title {
+    grid-area: title;
+    font-family: $au-font-display;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: $au-ink;
+    margin-top: 4px;
+}
+
+.au-quick-card-sub {
+    grid-area: sub;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $au-mute;
+}
+
+.au-quick-card-cta {
+    grid-area: cta;
+    width: 32px;
+    height: 32px;
+    border-radius: $au-radius-pill;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.au-quick-card:hover .au-quick-card-cta,
+.au-quick-card:focus-visible .au-quick-card-cta {
+    transform: translateX(2px);
+}
+
+/* === Tone variants ===
+ * Each tone tints the icon disc background + chevron disc on hover.
+ * Card body stays light so the typography is the focus.
+ */
+
+.au-quick-card--teal {
+    .au-quick-icon { background: $au-teal-soft; color: $au-teal; }
+    .au-quick-card-cta { background: rgba(15, 76, 92, 0.08); color: $au-teal; }
+    &:hover .au-quick-card-cta { background: $au-teal; color: $au-cream; }
+}
+
+.au-quick-card--pounamu {
+    .au-quick-icon { background: rgba(74, 111, 79, 0.14); color: $au-pounamu; }
+    .au-quick-card-cta { background: rgba(74, 111, 79, 0.10); color: $au-pounamu; }
+    &:hover .au-quick-card-cta { background: $au-pounamu; color: $au-cream; }
+}
+
+.au-quick-card--gold {
+    .au-quick-icon { background: rgba(232, 177, 78, 0.20); color: #8A6420; }
+    .au-quick-card-cta { background: rgba(232, 177, 78, 0.18); color: #8A6420; }
+    &:hover .au-quick-card-cta { background: $au-gold; color: $au-ink; }
+}
+
+.au-quick-card--terra {
+    .au-quick-icon { background: $au-terra-soft; color: $au-terracotta; }
+    .au-quick-card-cta { background: rgba(196, 93, 63, 0.12); color: $au-terracotta; }
+    &:hover .au-quick-card-cta { background: $au-terracotta; color: $au-cream; }
+}
