@@ -1,0 +1,22 @@
+<section class="au-kb" aria-label="Worth a read - recommended knowledge articles">
+  <header class="au-kb-head">
+    <h2 class="au-kb-title">Worth a read <em>Mātauranga</em></h2>
+    <a class="au-kb-all" ng-href="?id=kb_view2">All articles &rarr;</a>
+  </header>
+
+  <div class="au-kb-rail">
+    <a
+      ng-repeat="article in data.articles"
+      ng-href="{{article.href}}"
+      class="au-kb-card"
+      aria-label="{{article.title}}">
+
+      <div class="au-kb-image au-kb-image--{{article.imageTone}}"></div>
+      <div class="au-kb-body">
+        <div class="au-kb-topic">{{article.topic}}</div>
+        <div class="au-kb-cardtitle">{{article.title}}</div>
+        <div class="au-kb-meta">{{article.meta}}</div>
+      </div>
+    </a>
+  </div>
+</section>

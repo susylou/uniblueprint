@@ -47,6 +47,7 @@
 
 /* Otto card — primary CTA */
 .au-otto-card {
+    display: block;
     background: $au-otto-warm;
     color: $au-cream;
     border: none;
@@ -55,10 +56,17 @@
     position: relative;
     overflow: hidden;
     text-align: left;
+    text-decoration: none;
     cursor: pointer;
     box-shadow: $au-shadow-hero;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     font-family: $au-font-body;
+
+    &:hover,
+    &:focus {
+        color: $au-cream;
+        text-decoration: none;
+    }
 
     &:hover {
         transform: translateY(-2px);
@@ -216,6 +224,7 @@
     }
 
     .au-chip {
+        display: inline-block;
         background: $au-sand;
         color: $au-ink;
         padding: 6px 11px;
@@ -225,15 +234,23 @@
         border-radius: $au-radius-pill;
         cursor: pointer;
         font-family: $au-font-body;
+        text-decoration: none;
 
-        &:hover {
+        &:hover,
+        &:focus {
             background: darken($au-sand, 5%);
+            color: $au-ink;
+            text-decoration: none;
         }
 
         &:focus-visible {
             outline: 2px solid $au-teal;
             outline-offset: 2px;
         }
+    }
+
+    .au-search-form {
+        margin: 0;
     }
 }
 

@@ -1,0 +1,142 @@
+/*
+ * KB rail widget styles.
+ * "Worth a read / Mātauranga" — three knowledge cards under quick actions.
+ * Matches portal-wireframes.html v0.3.
+ */
+
+.au-kb {
+    padding: 8px 36px 48px;
+    background: $au-paper;
+    color: $au-ink;
+    font-family: $au-font-body;
+}
+
+.au-kb-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.au-kb-title {
+    font-family: $au-font-display;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    margin: 0;
+    color: $au-ink;
+
+    em {
+        font-style: italic;
+        color: $au-teal;
+        font-weight: 500;
+        font-size: 18px;
+        margin-left: 8px;
+    }
+}
+
+.au-kb-all {
+    font-size: 13px;
+    font-weight: 600;
+    color: $au-teal;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: darken($au-teal, 8%);
+        text-decoration: underline;
+    }
+}
+
+.au-kb-rail {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    @media (max-width: 1100px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.au-kb-card {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border: 1px solid $au-line;
+    border-radius: $au-radius-lg;
+    overflow: hidden;
+    box-shadow: $au-shadow-card;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+        transform: translateY(-2px);
+        box-shadow:
+            0 2px 4px rgba(26, 35, 41, 0.06),
+            0 10px 24px rgba(26, 35, 41, 0.10);
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &:focus-visible {
+        border-color: $au-teal;
+        box-shadow:
+            0 0 0 3px rgba(15, 76, 92, 0.18),
+            0 10px 24px rgba(26, 35, 41, 0.10);
+    }
+}
+
+.au-kb-image {
+    height: 100px;
+    background: linear-gradient(135deg, $au-teal-soft, $au-terra-soft);
+    position: relative;
+
+    &--a {
+        background: linear-gradient(135deg, $au-teal-soft, $au-terra-soft);
+    }
+    &--b {
+        background: linear-gradient(135deg, $au-terra-soft, $au-gold);
+    }
+    &--c {
+        background: linear-gradient(135deg, $au-sand, $au-teal-soft);
+    }
+}
+
+.au-kb-body {
+    padding: 16px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.au-kb-topic {
+    font-size: 10px;
+    color: $au-terracotta;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+}
+
+.au-kb-cardtitle {
+    font-family: $au-font-display;
+    font-size: 16px;
+    font-weight: 500;
+    color: $au-ink;
+    line-height: 1.3;
+}
+
+.au-kb-meta {
+    font-size: 12px;
+    color: $au-mute;
+    margin-top: 4px;
+}

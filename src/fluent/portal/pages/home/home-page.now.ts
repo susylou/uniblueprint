@@ -1,6 +1,7 @@
 import { SPPage } from '@servicenow/sdk/core'
 import { HeroWidget } from '../../widgets/au-hero/widget.now'
 import { QuickActionsWidget } from '../../widgets/au-quick-actions/widget.now'
+import { KbRailWidget } from '../../widgets/au-kb-rail/widget.now'
 
 /**
  * Student portal home page — the landing experience.
@@ -77,12 +78,44 @@ export const HomePage = SPPage({
                 },
             ],
         },
+        {
+            $id: Now.ID['page.home.container.kb'],
+            name: 'KB Rail',
+            cssClass: 'au-page-container au-page-container--kb',
+            parentClass: 'container-fluid',
+            order: 300,
+            rows: [
+                {
+                    $id: Now.ID['page.home.row.kb'],
+                    cssClass: 'au-page-row',
+                    order: 100,
+                    columns: [
+                        {
+                            $id: Now.ID['page.home.col.kb'],
+                            size: 12,
+                            order: 100,
+                            instances: [
+                                {
+                                    $id: Now.ID['page.home.instance.kb'],
+                                    title: 'KB Rail',
+                                    id: 'au-home-kb',
+                                    widget: KbRailWidget,
+                                    order: 100,
+                                    active: true,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
     ],
     css: `
         /* Page-level: paper background, no Bootstrap container chrome */
         body.sp { background: var(--au-paper, #FFFCF6); }
         .au-page-container--hero,
-        .au-page-container--quick { padding: 0; }
+        .au-page-container--quick,
+        .au-page-container--kb { padding: 0; }
         .au-page-row { margin: 0; }
         .au-page-row > [class^="col"] { padding: 0; }
     `,
