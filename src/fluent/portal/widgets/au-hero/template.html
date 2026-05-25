@@ -4,8 +4,8 @@
 
   <div class="au-hero-cards">
 
-    <!-- Otto AI card -->
-    <a class="au-otto-card" ng-href="?id=otto" aria-label="Talk to Otto">
+    <!-- Otto AI card - opens the in-place VA chat panel rather than navigating -->
+    <a class="au-otto-card" href="javascript:void(0)" onclick="event.preventDefault(); var f=document.querySelector('.conversation-button-container button'); if(f){f.click();} else {window.location.href='?id=otto';}" aria-label="Talk to Otto">
       <div class="au-otto-row">
         <div class="au-otto-avatar" aria-hidden="true">&#x2726;</div>
         <div class="au-otto-meta">
