@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[/**
+ * Hero widget — client controller.
+ * Controller alias is 'c' per SDK convention. No $scope direct access.
+ */
+function HeroController($location) {
+    var c = this;
+    c.query = '';
+
+    /**
+     * Otto CTA — for now, navigate to the conversation page. The actual
+     * Otto chat widget arrives in Phase 5 once AI Agent Studio is installed.
+     */
+    c.openOtto = function () {
+        $location.search('id', 'conversation');
+    };
+
+    /**
+     * Chip click pre-fills the search and submits.
+     */
+    c.useChip = function (text) {
+        c.query = text;
+        c.submitSearch();
+    };
+
+    /**
+     * Enter key in the search input.
+     */
+    c.onSearchKey = function (evt) {
+        if (evt && evt.which === 13) {
+            c.submitSearch();
+        }
+    };
+
+    /**
+     * Search submission — for now route to /student?id=search&q=<query>.
+     * Search page itself arrives in a later iteration.
+     */
+    c.submitSearch = function () {
+        var q = (c.query || '').trim();
+        if (!q) { return; }
+        $location.search({ id: 'search', q: q });
+    };
+}
+
+api.controller = HeroController;
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/*
+ * Hero widget styles.
+ * References theme SCSS variables defined in `Aotearoa Coastal` theme.
+ * Keep visual decisions aligned with portal-wireframes.html v0.3.
+ */
+
+.au-hero {
+    padding: 56px 36px 40px;
+    background:
+        radial-gradient(ellipse at 90% 20%, rgba(232, 177, 78, 0.18), transparent 50%),
+        radial-gradient(ellipse at 10% 100%, rgba(15, 76, 92, 0.14), transparent 55%),
+        linear-gradient(180deg, $au-paper 0%, $au-cream 100%);
+    color: $au-ink;
+    font-family: $au-font-body;
+    position: relative;
+
+    .au-hero-greeting {
+        font-family: $au-font-display;
+        font-size: 52px;
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        margin: 0 0 8px;
+        color: $au-ink;
+
+        em {
+            font-style: italic;
+            color: $au-teal;
+            font-weight: 500;
+        }
+    }
+
+    .au-hero-sub {
+        font-size: 16px;
+        color: $au-mute;
+        margin-bottom: 36px;
+        max-width: 540px;
+        line-height: 1.5;
+    }
+
+    .au-hero-cards {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 18px;
+    }
+}
+
+/* Otto card — primary CTA */
+.au-otto-card {
+    background: $au-otto-warm;
+    color: $au-cream;
+    border: none;
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: $au-shadow-hero;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    font-family: $au-font-body;
+
+    &amp;:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 36px rgba(15, 76, 92, 0.24);
+    }
+
+    &amp;:focus-visible {
+        outline: 3px solid $au-gold;
+        outline-offset: 3px;
+    }
+
+    &amp;::after {
+        content: '';
+        position: absolute;
+        right: -30px;
+        bottom: -30px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(232, 177, 78, 0.35), transparent 60%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .au-otto-row {
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+        position: relative;
+        z-index: 1;
+    }
+
+    .au-otto-avatar {
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: $au-cream;
+        color: $au-terracotta;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .au-otto-meta {
+        flex: 1;
+    }
+
+    .au-otto-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        opacity: 0.75;
+        margin-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .au-otto-title {
+        font-family: $au-font-display;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.2;
+        margin-bottom: 8px;
+    }
+
+    .au-otto-sub {
+        font-size: 13.5px;
+        line-height: 1.5;
+        opacity: 0.92;
+        max-width: 380px;
+    }
+
+    .au-otto-cta {
+        margin-top: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: $au-cream;
+        color: $au-teal;
+        padding: 11px 18px;
+        border-radius: $au-radius-pill;
+        font-size: 13px;
+        font-weight: 600;
+
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+/* Search card — secondary CTA */
+.au-search-card {
+    background: $au-cream;
+    border: 1px solid $au-line;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: $au-font-body;
+
+    .au-search-label {
+        font-size: 11px;
+        color: $au-mute;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 10px;
+    }
+
+    .au-search-box {
+        background: $au-paper;
+        border: 1px solid $au-line;
+        border-radius: 10px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+        cursor: text;
+        transition: border-color 0.15s;
+
+        &amp;:focus-within {
+            border-color: $au-teal;
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            color: $au-mute;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: $au-font-body;
+            font-size: 13px;
+            color: $au-ink;
+
+            &amp;::placeholder {
+                color: $au-mute;
+            }
+        }
+    }
+
+    .au-search-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .au-chip {
+        background: $au-sand;
+        color: $au-ink;
+        padding: 6px 11px;
+        font-size: 11.5px;
+        font-weight: 500;
+        border: none;
+        border-radius: $au-radius-pill;
+        cursor: pointer;
+        font-family: $au-font-body;
+
+        &amp;:hover {
+            background: darken($au-sand, 5%);
+        }
+
+        &amp;:focus-visible {
+            outline: 2px solid $au-teal;
+            outline-offset: 2px;
+        }
+    }
+}
+
+/* Mobile — stack the hero cards, tighten typography */
+@media (max-width: 768px) {
+    .au-hero {
+        padding: 28px 18px 24px;
+
+        .au-hero-greeting {
+            font-size: 34px;
+            letter-spacing: -0.5px;
+        }
+
+        .au-hero-sub {
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .au-hero-cards {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+    }
+
+    .au-otto-card {
+        padding: 20px;
+
+        .au-otto-title {
+            font-size: 19px;
+        }
+    }
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Aotearoa Uni hero — greeting, Otto CTA, search.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>au-hero</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+}]]></link>
+        <name>AU Hero</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[/**
+ * Hero widget — server script.
+ * Fetches the current user's first name for the persona-first greeting.
+ * Falls back to a friendly default if the user is anonymous or unnamed.
+ */
+(function () {
+    var user = gs.getUser();
+    var firstName = user ? user.getFirstName() : '';
+
+    if (!firstName) {
+        firstName = 'there';
+    }
+
+    data.firstName = firstName;
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-21 01:47:56</sys_created_on>
+        <sys_id>33e7bec2e13541ab80cf470a63507d23</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AU Hero</sys_name>
+        <sys_package display_value="Uni Blueprint" source="x_uni_blueprint">e9b14dfcdd06402ea54174be15c04152</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Uni Blueprint">e9b14dfcdd06402ea54174be15c04152</sys_scope>
+        <sys_update_name>sp_widget_33e7bec2e13541ab80cf470a63507d23</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-21 01:47:56</sys_updated_on>
+        <template><![CDATA[<div class="au-hero">
+  <h1 class="au-hero-greeting">Kia ora, <em>{{c.data.firstName}}</em></h1>
+  <div class="au-hero-sub">It's good to see you. Take a breath — we'll work through whatever's on today.</div>
+
+  <div class="au-hero-cards">
+
+    <!-- Otto AI card -->
+    <button class="au-otto-card" ng-click="c.openOtto()" type="button" aria-label="Talk to Otto">
+      <div class="au-otto-row">
+        <div class="au-otto-avatar" aria-hidden="true">&#x2726;</div>
+        <div class="au-otto-meta">
+          <div class="au-otto-label">Your assistant · in Wellbeing mode</div>
+          <div class="au-otto-title">Otto is here whenever you need a kōrero</div>
+          <div class="au-otto-sub">Talk through how you're feeling, get pointed to help, or pick up a previous conversation — Otto has the full picture so you don't repeat your story.</div>
+          <span class="au-otto-cta">
+            Talk to Otto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Search card -->
+    <div class="au-search-card">
+      <div class="au-search-label">Looking for something?</div>
+      <label class="au-search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input
+          type="search"
+          ng-model="c.query"
+          ng-keydown="c.onSearchKey($event)"
+          placeholder="Type a question or topic…"
+          aria-label="Search for help or topics" />
+      </label>
+      <div class="au-search-chips">
+        <button class="au-chip" type="button" ng-click="c.useChip('Extension request')">Extension request</button>
+        <button class="au-chip" type="button" ng-click="c.useChip('Pay fees')">Pay fees</button>
+        <button class="au-chip" type="button" ng-click="c.useChip('Counselling')">Counselling</button>
+        <button class="au-chip" type="button" ng-click="c.useChip('Timetable')">Timetable</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

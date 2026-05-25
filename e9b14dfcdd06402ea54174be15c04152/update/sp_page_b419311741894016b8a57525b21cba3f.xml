@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>
+        /* Page-level: paper background, no Bootstrap container chrome */
+        body.sp { background: var(--au-paper, #FFFCF6); }
+        .au-page-container--hero { padding: 0; }
+        .au-page-row { margin: 0; }
+        .au-page-row &gt; [class^="col"] { padding: 0; }
+    </css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <human_readable_url_structure/>
+        <id>home</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>false</public>
+        <roles/>
+        <seo_script/>
+        <short_description>Landing page for Aotearoa University student portal.</short_description>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-21 01:47:42</sys_created_on>
+        <sys_id>b419311741894016b8a57525b21cba3f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>home</sys_name>
+        <sys_package display_value="Uni Blueprint" source="x_uni_blueprint">e9b14dfcdd06402ea54174be15c04152</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Uni Blueprint">e9b14dfcdd06402ea54174be15c04152</sys_scope>
+        <sys_update_name>sp_page_b419311741894016b8a57525b21cba3f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-21 01:47:42</sys_updated_on>
+        <title>Aotearoa University · Home</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=b419311741894016b8a57525b21cba3f"/>
+</record_update>

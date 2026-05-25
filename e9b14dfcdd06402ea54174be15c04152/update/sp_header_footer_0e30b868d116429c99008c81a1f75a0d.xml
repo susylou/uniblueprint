@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_header_footer">
+    <sp_header_footer action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function HeaderController($location) {
+    var c = this;
+    c.lang = 'en';
+
+    c.setLang = function (lang) {
+        c.lang = lang;
+        // Persisting per-user lang preference is a future iteration.
+        // For now, this just toggles the active visual state.
+    };
+
+    /**
+     * Render the right href for a menu item. SP menu items can be:
+     *   - type 'page' → ?id=<page_id>
+     *   - type 'url'  → the url directly
+     *   - otherwise   → '#' (placeholder)
+     */
+    c.itemHref = function (item) {
+        if (!item) { return '#'; }
+        if (item.type === 'url' && item.url) { return item.url; }
+        if (item.type === 'page' && item.page) { return '?id=' + item.page; }
+        return '#';
+    };
+
+    /**
+     * Highlight the current page in nav.
+     */
+    c.isActive = function (item) {
+        if (!item || item.type !== 'page') { return false; }
+        var current = ($location.search() || {}).id || 'home';
+        return current === item.page;
+    };
+}
+
+api.controller = HeaderController;
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/*
+ * Top-bar header for the Aotearoa University student portal.
+ * Sticky position is handled by the theme (fixedHeader: true).
+ */
+
+.au-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 36px;
+    background: $au-paper;
+    border-bottom: 1px solid $au-line;
+    font-family: $au-font-body;
+    color: $au-ink;
+    gap: 24px;
+}
+
+.au-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+
+    &amp;:focus-visible {
+        outline: 2px solid $au-teal;
+        outline-offset: 4px;
+        border-radius: $au-radius-sm;
+    }
+}
+
+.au-logomark {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: $au-teal;
+    color: $au-cream;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $au-font-display;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.5px;
+}
+
+.au-wordmark {
+    font-family: $au-font-display;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: $au-ink;
+    letter-spacing: -0.2px;
+
+    .au-wordmark-reo {
+        display: block;
+        font-size: 10px;
+        font-weight: 500;
+        font-family: $au-font-body;
+        color: $au-mute;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-top: 2px;
+
+        em {
+            font-style: italic;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+    }
+}
+
+.au-nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    justify-content: center;
+
+    li {
+        position: relative;
+    }
+
+    a {
+        display: block;
+        padding: 6px 0;
+        color: $au-ink;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+
+        &amp;:focus-visible {
+            outline: 2px solid $au-teal;
+            outline-offset: 4px;
+            border-radius: $au-radius-sm;
+        }
+    }
+
+    .is-active a {
+        color: $au-teal;
+        font-weight: 600;
+
+        &amp;::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 2px;
+            background: $au-terracotta;
+            border-radius: 2px;
+        }
+    }
+
+    .au-nav-en {
+        display: block;
+    }
+
+    .au-nav-reo {
+        display: block;
+        font-size: 10px;
+        color: $au-mute;
+        font-style: italic;
+        line-height: 1;
+        margin-top: 2px;
+    }
+
+    .is-active .au-nav-reo {
+        color: $au-terracotta;
+    }
+}
+
+.au-top-actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.au-lang-toggle {
+    display: flex;
+    gap: 2px;
+    background: $au-sand;
+    border-radius: $au-radius-pill;
+    padding: 3px;
+    font-size: 11px;
+    font-weight: 600;
+
+    .au-lang-opt {
+        padding: 4px 12px;
+        border-radius: $au-radius-pill;
+        color: $au-mute;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-family: $au-font-body;
+        font-weight: inherit;
+        font-size: inherit;
+
+        &amp;.on {
+            background: $au-teal;
+            color: $au-cream;
+        }
+
+        &amp;:focus-visible {
+            outline: 2px solid $au-teal;
+            outline-offset: 2px;
+        }
+    }
+}
+
+.au-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $au-terracotta, $au-gold);
+    color: $au-cream;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+/* Mobile — collapse nav, keep brand + actions visible */
+@media (max-width: 768px) {
+    .au-topbar {
+        padding: 14px 18px;
+        gap: 12px;
+    }
+
+    .au-nav {
+        display: none;
+    }
+
+    .au-wordmark {
+        font-size: 14px;
+
+        .au-wordmark-reo {
+            display: none;
+        }
+    }
+
+    .au-logomark {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Top-bar header with bilingual nav and profile.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>au-student-header</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+}]]></link>
+        <name>AU Student Header</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[/**
+ * Header widget — server script.
+ * Loads the portal's main menu and the current user's initials.
+ */
+(function () {
+    var portal = $sp.getPortalRecord();
+    var menuId = portal.getValue('main_menu');
+    if (menuId) {
+        data.menu = $sp.getMenu(menuId);
+    }
+
+    var user = gs.getUser();
+    var fn = (user ? user.getFirstName() : '') || '';
+    var ln = (user ? user.getLastName() : '') || '';
+    var initials = (fn.charAt(0) + ln.charAt(0)).toUpperCase();
+    data.userInitials = initials || 'U';
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <static>false</static>
+        <sys_class_name>sp_header_footer</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-21 01:47:36</sys_created_on>
+        <sys_id>0e30b868d116429c99008c81a1f75a0d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AU Student Header</sys_name>
+        <sys_package display_value="Uni Blueprint" source="x_uni_blueprint">e9b14dfcdd06402ea54174be15c04152</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Uni Blueprint">e9b14dfcdd06402ea54174be15c04152</sys_scope>
+        <sys_update_name>sp_header_footer_0e30b868d116429c99008c81a1f75a0d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-21 01:47:36</sys_updated_on>
+        <template><![CDATA[<nav class="au-topbar" role="navigation" aria-label="Primary">
+  <a class="au-logo" href="?id=home" aria-label="Aotearoa University home">
+    <span class="au-logomark" aria-hidden="true">A</span>
+    <span class="au-wordmark">
+      Aotearoa University
+      <span class="au-wordmark-reo">Te Whare Wānanga o Aotearoa <em>[Te Reo TBC]</em></span>
+    </span>
+  </a>
+
+  <ul class="au-nav" ng-if="c.data.menu &amp;&amp; c.data.menu.items">
+    <li ng-repeat="item in c.data.menu.items track by item.sys_id"
+        ng-class="{ 'is-active': c.isActive(item) }">
+      <a ng-href="{{c.itemHref(item)}}"
+         ng-attr-target="{{item.url_target || undefined}}">
+        <span class="au-nav-en">{{item.label}}</span>
+        <span class="au-nav-reo" ng-if="item.hint">{{item.hint}}</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="au-top-actions">
+    <div class="au-lang-toggle" role="group" aria-label="Language">
+      <button type="button"
+              class="au-lang-opt"
+              ng-class="{ 'on': c.lang === 'en' }"
+              ng-click="c.setLang('en')">En</button>
+      <button type="button"
+              class="au-lang-opt"
+              ng-class="{ 'on': c.lang === 'reo' }"
+              ng-click="c.setLang('reo')">Reo</button>
+    </div>
+    <div class="au-avatar" aria-label="Your profile">{{c.data.userInitials}}</div>
+  </div>
+</nav>
+]]></template>
+    </sp_header_footer>
+</record_update>

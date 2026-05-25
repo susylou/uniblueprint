@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_module">
+    <sys_module action="INSERT_OR_UPDATE">
+        <content><![CDATA[{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "serialNumber": "urn:uuid:5eb277a0-0763-426c-a994-3d6821c2deaa",
+  "metadata": {
+    "timestamp": "2026-05-21T01:47:16.464Z",
+    "tools": {
+      "components": [
+        {
+          "type": "library",
+          "name": "sdk-build-plugins",
+          "group": "@servicenow",
+          "version": "4.6.1",
+          "author": "ServiceNow"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "uni-blueprint",
+      "version": "0.0.1",
+      "bom-ref": "pkg:servicenow/uni-blueprint@0.0.1?sys_scope_id=e9b14dfcdd06402ea54174be15c04152",
+      "licenses": [
+        {
+          "license": {
+            "name": "UNLICENSED"
+          }
+        }
+      ],
+      "purl": "pkg:servicenow/uni-blueprint@0.0.1?sys_scope_id=e9b14dfcdd06402ea54174be15c04152"
+    }
+  },
+  "components": [],
+  "dependencies": [
+    {
+      "ref": "pkg:servicenow/uni-blueprint@0.0.1?sys_scope_id=e9b14dfcdd06402ea54174be15c04152"
+    }
+  ]
+}]]></content>
+        <external_source>false</external_source>
+        <path>x_uni_blueprint/uni-blueprint/0.0.1/bom.json</path>
+        <sys_class_name>sys_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-20 08:23:57</sys_created_on>
+        <sys_id>687e0285849841ce8a87aecf7d84985d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_uni_blueprint/uni-blueprint/0.0.1/bom.json</sys_name>
+        <sys_package display_value="Uni Blueprint" source="x_uni_blueprint">e9b14dfcdd06402ea54174be15c04152</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Uni Blueprint">e9b14dfcdd06402ea54174be15c04152</sys_scope>
+        <sys_update_name>sys_module_687e0285849841ce8a87aecf7d84985d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-20 08:23:57</sys_updated_on>
+    </sys_module>
+</record_update>

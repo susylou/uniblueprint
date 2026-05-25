@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_header_footer">
+    <sp_header_footer action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function () {
+    /* widget controller */
+    var c = this;
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.au-footer {
+    background: $au-cream;
+    border-top: 1px solid $au-line;
+    padding: 24px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: $au-mute;
+    font-family: $au-font-body;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    .au-footer-ack {
+        font-style: italic;
+        max-width: 540px;
+        line-height: 1.5;
+        margin: 0;
+
+        strong {
+            color: $au-ink;
+            font-style: normal;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+    }
+
+    .au-footer-links {
+        display: flex;
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        a {
+            color: $au-mute;
+            text-decoration: none;
+            font-size: 11px;
+
+            &amp;:hover {
+                color: $au-ink;
+            }
+
+            &amp;:focus-visible {
+                outline: 2px solid $au-teal;
+                outline-offset: 2px;
+                border-radius: $au-radius-sm;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .au-footer {
+        padding: 18px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Footer with cultural acknowledgement and service links.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>au-student-footer</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+}]]></link>
+        <name>AU Student Footer</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function () {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+})();]]></script>
+        <servicenow>false</servicenow>
+        <static>false</static>
+        <sys_class_name>sp_header_footer</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-21 01:47:38</sys_created_on>
+        <sys_id>faf671600edd4ded8afc7d3a22f8e126</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AU Student Footer</sys_name>
+        <sys_package display_value="Uni Blueprint" source="x_uni_blueprint">e9b14dfcdd06402ea54174be15c04152</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Uni Blueprint">e9b14dfcdd06402ea54174be15c04152</sys_scope>
+        <sys_update_name>sp_header_footer_faf671600edd4ded8afc7d3a22f8e126</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-21 01:47:38</sys_updated_on>
+        <template><![CDATA[<footer class="au-footer" role="contentinfo">
+  <p class="au-footer-ack">
+    <strong>[Cultural acknowledgement — pending review]</strong>
+    A placeholder for the institution's mihi / acknowledgement of mana whenua,
+    written and reviewed by appropriate kaitiaki before publication.
+  </p>
+  <ul class="au-footer-links">
+    <li><a href="#">Accessibility</a></li>
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Te Reo</a></li>
+  </ul>
+</footer>
+]]></template>
+    </sp_header_footer>
+</record_update>
