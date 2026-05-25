@@ -1,36 +1,31 @@
 <section class="au-quick" aria-label="Ways we can help">
   <header class="au-quick-head">
     <h2 class="au-quick-title">Ways we can help</h2>
-    <p class="au-quick-lede">Pick whatever fits today — there's no wrong door.</p>
+    <p class="au-quick-lede">Pick whatever fits today - there's no wrong door.</p>
   </header>
 
   <div class="au-quick-grid">
-    <button
-      ng-repeat="card in c.data.cards"
+    <a
+      ng-repeat="card in data.cards"
+      ng-href="{{card.href}}"
       class="au-quick-card au-quick-card--{{card.tone}}"
-      type="button"
-      ng-click="c.go(card)"
       aria-label="{{card.title}}">
 
       <span class="au-quick-icon" aria-hidden="true">
-        <!-- people -->
         <svg ng-if="card.icon === 'people'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="9" cy="8" r="3.4"/>
           <path d="M2.5 19c.6-3 3.4-4.8 6.5-4.8s5.9 1.8 6.5 4.8"/>
           <circle cx="17" cy="7" r="2.6"/>
           <path d="M15.5 13.5c2.7 0 5 1.4 5.5 3.6"/>
         </svg>
-        <!-- check -->
         <svg ng-if="card.icon === 'check'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="4" y="3.5" width="16" height="17" rx="2.5"/>
           <path d="M8 11.5l2.6 2.6L16 8.7"/>
         </svg>
-        <!-- book -->
         <svg ng-if="card.icon === 'book'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4.5h6a3 3 0 0 1 3 3v12a2.5 2.5 0 0 0-2.5-2.5H4z"/>
           <path d="M20 4.5h-6a3 3 0 0 0-3 3v12a2.5 2.5 0 0 1 2.5-2.5H20z"/>
         </svg>
-        <!-- phone -->
         <svg ng-if="card.icon === 'phone'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 4.5h3.2l1.6 4-2.2 1.4a12 12 0 0 0 5.5 5.5l1.4-2.2 4 1.6V18a1.5 1.5 0 0 1-1.5 1.5C10.7 19.5 4.5 13.3 4.5 6A1.5 1.5 0 0 1 6 4.5z"/>
         </svg>
@@ -42,6 +37,6 @@
       <span class="au-quick-card-cta" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </span>
-    </button>
+    </a>
   </div>
 </section>
