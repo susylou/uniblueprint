@@ -1,13 +1,14 @@
 import { SPMenu } from '@servicenow/sdk/core'
 import { HomePage } from '../pages/home/home-page.now'
+import { GetHelpPage } from '../pages/get-help/get-help-page.now'
 
 /**
  * Student portal main menu — bilingual English/Te Reo lock-ups.
  *
- * Home links to the live home page; Get help / My place / Knowledge are
- * URL placeholders pointing to home for now (those pages arrive in
- * subsequent iterations). Each item carries its Te Reo subtitle in the
- * `hint` field so the header widget can render the bilingual pair.
+ * Home and Get help are live pages; My place / Knowledge are still URL
+ * placeholders pointing to home (those pages arrive in subsequent iterations).
+ * Each item carries its Te Reo subtitle in the `hint` field so the header
+ * widget can render the bilingual pair.
  */
 export const StudentMenu = SPMenu({
     $id: Now.ID['menu.au-student'],
@@ -25,8 +26,8 @@ export const StudentMenu = SPMenu({
             $id: Now.ID['menu.au-student.gethelp'],
             label: 'Get help',
             hint: 'Āwhina',
-            type: 'url',
-            url: '?id=home',
+            type: 'page',
+            page: GetHelpPage,
             order: 200,
         },
         {
