@@ -1,5 +1,6 @@
 import { SPPage } from '@servicenow/sdk/core'
 import { HeroWidget } from '../../widgets/au-hero/widget.now'
+import { TodayWidget } from '../../widgets/au-today/widget.now'
 import { QuickActionsWidget } from '../../widgets/au-quick-actions/widget.now'
 import { KbRailWidget } from '../../widgets/au-kb-rail/widget.now'
 
@@ -11,7 +12,7 @@ import { KbRailWidget } from '../../widgets/au-kb-rail/widget.now'
  * arrive in subsequent iterations of Phase 2.
  */
 export const HomePage = SPPage({
-    pageId: 'home',
+    pageId: 'au-home',
     title: 'Aotearoa University · Home',
     shortDescription: 'Landing page for Aotearoa University student portal.',
     category: 'custom',
@@ -38,6 +39,37 @@ export const HomePage = SPPage({
                                     title: 'Hero',
                                     id: 'au-home-hero',
                                     widget: HeroWidget,
+                                    order: 100,
+                                    active: true,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            $id: Now.ID['page.home.container.today'],
+            name: 'Today',
+            cssClass: 'au-page-container au-page-container--today',
+            parentClass: 'container-fluid',
+            order: 150,
+            rows: [
+                {
+                    $id: Now.ID['page.home.row.today'],
+                    cssClass: 'au-page-row',
+                    order: 100,
+                    columns: [
+                        {
+                            $id: Now.ID['page.home.col.today'],
+                            size: 12,
+                            order: 100,
+                            instances: [
+                                {
+                                    $id: Now.ID['page.home.instance.today'],
+                                    title: 'Today',
+                                    id: 'au-home-today',
+                                    widget: TodayWidget,
                                     order: 100,
                                     active: true,
                                 },
@@ -114,6 +146,7 @@ export const HomePage = SPPage({
         /* Page-level: paper background, no Bootstrap container chrome */
         body.sp { background: var(--au-paper, #FFFCF6); }
         .au-page-container--hero,
+        .au-page-container--today,
         .au-page-container--quick,
         .au-page-container--kb { padding: 0; }
         .au-page-row { margin: 0; }

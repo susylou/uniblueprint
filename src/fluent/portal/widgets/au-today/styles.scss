@@ -1,0 +1,141 @@
+/*
+ * au-today widget styles — "Today / I tēnei rā" persona-first panel.
+ * Sits between the hero and quick actions on the home landing.
+ * Matches portal-wireframes.html v0.3 (desktop landing "Today" section).
+ * Tokens ($au-*) come from the Aotearoa Coastal theme.
+ */
+
+.au-today {
+    padding: 28px 36px 12px;
+    background: $au-paper;
+    color: $au-ink;
+    font-family: $au-font-body;
+}
+
+.au-today-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.au-today-title {
+    font-family: $au-font-display;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    margin: 0;
+    color: $au-ink;
+
+    em {
+        font-style: italic;
+        color: $au-teal;
+        font-weight: 500;
+        font-size: 18px;
+        margin-left: 8px;
+    }
+}
+
+.au-today-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: $au-teal;
+    text-decoration: none;
+
+    &:hover,
+    &:focus { text-decoration: underline; }
+}
+
+.au-today-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    @media (max-width: 1100px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 640px)  { grid-template-columns: 1fr; }
+}
+
+.au-today-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #FFFFFF;
+    border: 1px solid $au-line;
+    border-radius: $au-radius-lg;
+    padding: 18px 20px 20px;
+    box-shadow: $au-shadow-card;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+    // The in-progress card is the focal one — soft teal wash + accent edge.
+    &--active {
+        border-color: rgba(15, 76, 92, 0.28);
+        background: linear-gradient(180deg, $au-teal-soft 0%, #FFFFFF 62%);
+        box-shadow:
+            0 2px 6px rgba(15, 76, 92, 0.10),
+            0 10px 24px rgba(15, 76, 92, 0.10);
+    }
+}
+
+.au-today-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: $au-teal;
+
+    .au-today-card--resolved & { color: $au-pounamu; }
+    .au-today-card--coming &   { color: $au-terracotta; }
+}
+
+.au-today-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $au-teal;
+    box-shadow: 0 0 0 0 rgba(15, 76, 92, 0.45);
+    animation: au-today-pulse 1.8s ease-out infinite;
+}
+
+@keyframes au-today-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(15, 76, 92, 0.45); }
+    70%  { box-shadow: 0 0 0 7px rgba(15, 76, 92, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(15, 76, 92, 0); }
+}
+
+// Respect reduced-motion preference (accessibility-from-day-one principle).
+@media (prefers-reduced-motion: reduce) {
+    .au-today-pulse { animation: none; }
+}
+
+.au-today-cardtitle {
+    font-family: $au-font-display;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: $au-ink;
+}
+
+.au-today-sub {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: $au-mute;
+}
+
+.au-today-meta {
+    margin-top: 4px;
+    font-size: 12.5px;
+    color: $au-mute;
+}
+
+.au-today-emph {
+    font-weight: 700;
+    color: $au-ink;
+
+    .au-today-card--resolved & { color: $au-pounamu; }
+    .au-today-card--coming &   { color: $au-teal; }
+}

@@ -35,7 +35,7 @@ export const StudentMenu = SPMenu({
             label: 'My place',
             hint: '[Te Reo TBC]',
             type: 'url',
-            url: '?id=home',
+            url: '?id=au-home',
             order: 300,
         },
         {
@@ -43,7 +43,7 @@ export const StudentMenu = SPMenu({
             label: 'Knowledge',
             hint: 'Mātauranga',
             type: 'url',
-            url: '?id=home',
+            url: '?id=au-home',
             order: 400,
         },
     ],

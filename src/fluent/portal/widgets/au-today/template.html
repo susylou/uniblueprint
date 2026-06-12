@@ -1,0 +1,33 @@
+<!--
+  au-today — "Today / I tēnei rā" persona-first panel.
+  Three cards: in-progress conversation, recently-resolved request, upcoming
+  deadline. Mirrors the "Today" section of portal-wireframes.html v0.3.
+
+  Binding note: no `c` controllerAs in SDK widgets — bind to data.* and use
+  ng-href, never c.data / ng-click. (This rule has bitten this app before.)
+-->
+<section class="au-today" aria-label="Today">
+  <header class="au-today-head">
+    <h2 class="au-today-title">{{::data.heading.title}} <em>{{::data.heading.reo}}</em></h2>
+    <a class="au-today-link" ng-href="{{::data.heading.href}}">{{::data.heading.link}}</a>
+  </header>
+
+  <div class="au-today-row">
+    <div ng-repeat="card in ::data.cards"
+         class="au-today-card au-today-card--{{::card.tone}}">
+
+      <div class="au-today-tag">
+        <span class="au-today-pulse" ng-if="::card.pulse" aria-hidden="true"></span>
+        {{::card.tag}}
+      </div>
+
+      <div class="au-today-cardtitle">{{::card.title}}</div>
+      <div class="au-today-sub">{{::card.sub}}</div>
+
+      <div class="au-today-meta">
+        <strong class="au-today-emph" ng-if="::card.metaEmphPos === 'start'">{{::card.metaEmph}}</strong><span ng-if="::card.metaEmphPos === 'start'">&nbsp;</span>{{::card.meta}}<strong class="au-today-emph" ng-if="::card.metaEmphPos === 'end'">{{::card.metaEmph}}</strong>
+      </div>
+
+    </div>
+  </div>
+</section>

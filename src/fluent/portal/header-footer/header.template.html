@@ -1,5 +1,5 @@
 <nav class="au-topbar" role="navigation" aria-label="Primary">
-  <a class="au-logo" href="?id=home" aria-label="Aotearoa University home">
+  <a class="au-logo" href="?id=au-home" aria-label="Aotearoa University home">
     <span class="au-logomark" aria-hidden="true">A</span>
     <span class="au-wordmark">
       Aotearoa University
@@ -7,10 +7,10 @@
     </span>
   </a>
 
-  <ul class="au-nav" ng-if="c.data.menu &amp;&amp; c.data.menu.items">
-    <li ng-repeat="item in c.data.menu.items track by item.sys_id"
-        ng-class="{ 'is-active': c.isActive(item) }">
-      <a ng-href="{{c.itemHref(item)}}"
+  <ul class="au-nav" ng-if="data.menu &amp;&amp; data.menu.items">
+    <li ng-repeat="item in data.menu.items track by $index"
+        ng-class="{ 'is-active': item.isActive }">
+      <a ng-href="{{item.href}}"
          ng-attr-target="{{item.url_target || undefined}}">
         <span class="au-nav-en">{{item.label}}</span>
         <span class="au-nav-reo" ng-if="item.hint">{{item.hint}}</span>
@@ -20,15 +20,9 @@
 
   <div class="au-top-actions">
     <div class="au-lang-toggle" role="group" aria-label="Language">
-      <button type="button"
-              class="au-lang-opt"
-              ng-class="{ 'on': c.lang === 'en' }"
-              ng-click="c.setLang('en')">En</button>
-      <button type="button"
-              class="au-lang-opt"
-              ng-class="{ 'on': c.lang === 'reo' }"
-              ng-click="c.setLang('reo')">Reo</button>
+      <button type="button" class="au-lang-opt on">En</button>
+      <button type="button" class="au-lang-opt">Reo</button>
     </div>
-    <div class="au-avatar" aria-label="Your profile">{{c.data.userInitials}}</div>
+    <div class="au-avatar" aria-label="Your profile">{{data.userInitials}}</div>
   </div>
 </nav>
