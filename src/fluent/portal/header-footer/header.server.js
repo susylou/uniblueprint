@@ -15,7 +15,11 @@
  */
 (function () {
     var portal = $sp.getPortalRecord();
-    var menuId = portal.getValue('main_menu');
+    // The portal's main-menu reference lives in the 'sp_rectangle_menu' field
+    // (label "Main menu") — NOT 'main_menu'. Reading the wrong column left
+    // menuId empty, so the nav never rendered. Fall back to 'main_menu' for
+    // any instance/version that uses that column instead.
+    var menuId = portal.getValue('sp_rectangle_menu') || portal.getValue('main_menu');
     var currentPageId = $sp.getParameter('id') || portal.getDisplayValue('default_page') || '';
 
     data.menu = { items: [] };
